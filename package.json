@@ -18,5 +18,22 @@
     "mkgs-tool": "^0.1.6",
     "mocha": "*",
     "nyc": "*"
-  }
+  },
+  "dependencies": {
+    "is-plain-obj": "^2.0.0",
+    "merge-options": "^2.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mkg20001/mkg-bin-gen.git"
+  },
+  "keywords": [
+    "binary",
+    "cli",
+    "generator"
+  ],
+  "bugs": {
+    "url": "https://github.com/mkg20001/mkg-bin-gen/issues"
+  },
+  "homepage": "https://github.com/mkg20001/mkg-bin-gen#readme"
 }
