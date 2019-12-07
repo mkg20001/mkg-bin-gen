@@ -33,7 +33,7 @@ module.exports = (name, { validator: v, yargsExtends: y, configNameGenerators: g
     const hints = [
       'setting the --config argument',
       'setting the CONFIG= env variable',
-      ...files.forEach((file) => `writing the config to ${file}`)
+      ...files.map((file) => `writing the config to ${file}`)
     ]
 
     const lf = '\n  - '
