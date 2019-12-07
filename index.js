@@ -15,7 +15,7 @@ const generators = [
   (name, fmt) => `${process.cwd()}/config.${fmt}`
 ]
 
-const pickExisting = (...paths) => paths.filter(p => fs.existsSync(p))[0]
+const pickExisting = (paths) => paths.filter(p => fs.existsSync(p))[0]
 
 module.exports = (name, { validator: v, yargsExtends: y, configNameGenerators: g }, init) => {
   const yargs = require('yargs') // eslint-disable-line
