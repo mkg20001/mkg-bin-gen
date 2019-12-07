@@ -26,7 +26,14 @@ module.exports = (name, { v, y }, init) => {
   }
 
   const contents = String(fs.readFileSync(file))
-  const parsed = formats[file.split('.').pop()](contents)
+  let parsed = formats[file.split('.').pop()](contents)
+
+  if (v) {
+    const { error, value } = v.validate(parsed)
+    if (error) { throw error }
+
+    parsed = value
+  }
 
   const config = {}
   Object.assign(config, parsed)
