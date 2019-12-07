@@ -11,7 +11,7 @@ const formats = {
 
 const pickExisting = (...paths) => paths.filter(p => fs.existsSync(p))[0]
 
-module.exports = (name, { v, y }, init) => {
+module.exports = (name, { validator: v, yargsExtends: y }, init) => {
   const yargs = require('yargs') // eslint-disable-line
     .option('verbose', {
       alias: 'v',
