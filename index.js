@@ -15,10 +15,10 @@ const generators = [
   (name, fmt) => `${process.cwd()}/config.${fmt}`
 ]
 
-const pickExisting = (paths) => paths.filter(p => fs.existsSync(p))[0]
+const pickExisting = paths => paths.filter(p => fs.existsSync(p))[0]
 
-module.exports = (name, { validator: v, yargsExtends: y, configNameGenerators: g }, init) => {
-  const yargs = require('yargs') // eslint-disable-line
+module.exports = (name, { validator: v, formats: f, yargsExtends: y, configNameGenerators: g }, init) => {
+  const yargs = require('yargs')
     .option('verbose', {
       alias: 'v',
       type: 'boolean',
@@ -26,14 +26,14 @@ module.exports = (name, { validator: v, yargsExtends: y, configNameGenerators: g
     })
   const argv = (y ? y(yargs) : yargs).argv
 
-  const files = Object.keys(formats).map(fmt => (g || generators).map(g => g(name, fmt))).reduce((a, b) => a.concat(b), [])
+  const files = Object.keys(f || formats).map(fmt => (g || generators).map(g => g(name, fmt))).reduce((a, b) => a.concat(b), [])
 
   const file = argv.config || process.env.CONFIG || pickExisting(files)
   if (!file) {
     const hints = [
       'setting the --config argument',
       'setting the CONFIG= env variable',
-      ...files.map((file) => `writing the config to ${file}`)
+      ...files.map(file => `writing the config to ${file}`)
     ]
 
     const lf = '\n  - '
@@ -42,11 +42,13 @@ module.exports = (name, { validator: v, yargsExtends: y, configNameGenerators: g
   }
 
   const contents = String(fs.readFileSync(file))
-  let parsed = formats[file.split('.').pop()](contents)
+  let parsed = (f || formats)[file.split('.').pop()](contents)
 
   if (v) {
     const { error, value } = v.validate(parsed)
-    if (error) { throw error }
+    if (error) {
+      throw error
+    }
 
     parsed = value
   }
