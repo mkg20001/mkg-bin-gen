@@ -5,8 +5,8 @@ const fs = require('fs')
 
 const formats = {
   json: JSON.parse,
-  yaml: yaml.safeLoad,
-  yml: yaml.safeLoad
+  yaml: yaml.load,
+  yml: yaml.load
 }
 
 const generators = [
