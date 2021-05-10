@@ -1,7 +1,7 @@
 {
   "extends": [
     "oclif",
-    "aegir-standalone"
+    "ipfs/js"
   ],
   "rules": {
     "no-await-in-loop": "off"

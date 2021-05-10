@@ -2,7 +2,7 @@
 
 'use strict'
 
-const Joi = require('@hapi/joi')
+const Joi = require('joi')
 
 require('..')(
   'test-bin',

@@ -20,15 +20,19 @@
   "devDependencies": {
     "eslint": "*",
     "eslint-config-aegir-standalone": "*",
+    "eslint-config-ipfs": "*",
     "eslint-config-oclif": "*",
-    "mkgs-tool": "^0.1.9",
+    "joi": "^17.4.0",
+    "mkgs-tool": "^0.1.15",
     "mocha": "*",
     "nyc": "*"
   },
+  "peerDependencies": {
+    "joi": ">=17"
+  },
   "dependencies": {
-    "@hapi/joi": "^17.1.1",
-    "js-yaml": "^3.14.0",
-    "yargs": "^15.3.1"
+    "js-yaml": "^4.1.0",
+    "yargs": "^17.0.1"
   },
   "repository": {
     "type": "git",
