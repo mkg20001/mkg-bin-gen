@@ -6,7 +6,7 @@
       "eslint"
     ]
   },
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Tiny generator to create a binary file that accepts a config file in various formats",
   "main": "index.js",
   "author": "Maciej Krüger <mkg20001@gmail.com>",
