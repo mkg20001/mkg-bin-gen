@@ -9,5 +9,5 @@ require('..')(
   {
     validator: Joi.any() // Joi.object({ ...
   },
-  require('.')
+  require('./index.cjs')
 )

@@ -23,7 +23,7 @@ function launchWrapper (fncLike, config) {
   } else if (typeof fncLike === 'function') {
     return fncLike(config)
   } else if (typeof fncLike === 'object' && typeof fncLike.default === 'function') {
-    return fncLike
+    return fncLike.default(config)
   } else {
     throw new TypeError('bin-gen was passed non-function/non-import object. Pass it either an import() promise with a default function export, a function or an object with a .default function property')
   }
@@ -69,5 +69,5 @@ module.exports = (name, { validator: v, formats: f, yargsExtends: y, configNameG
   Object.assign(config, parsed)
   Object.assign(config, argv)
 
-  launchWrapper(init, config)
+  return launchWrapper(init, config)
 }
