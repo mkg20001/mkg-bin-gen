@@ -19,7 +19,7 @@ const pickExisting = paths => paths.filter(p => fs.existsSync(p))[0]
 
 function launchWrapper (fncLike, config) {
   if (fncLike instanceof Promise) {
-    fncLike.then(imported => launchWrapper(imported, config))
+    return fncLike.then(imported => launchWrapper(imported, config))
   } else if (typeof fncLike === 'function') {
     return fncLike(config)
   } else if (typeof fncLike === 'object' && typeof fncLike.default === 'function') {
