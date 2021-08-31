@@ -22,7 +22,7 @@ function launchWrapper (fncLike, config) {
     fncLike.then(imported => launchWrapper(imported, config))
   } else if (typeof fncLike === 'function') {
     return fncLike(config)
-  } else if (typeof fncLike.default === 'function') {
+  } else if (typeof fncLike === 'object' && typeof fncLike.default === 'function') {
     return fncLike
   } else {
     throw new TypeError('bin-gen was passed non-function/non-import object. Pass it either an import() promise with a default function export, a function or an object with a .default function property')
