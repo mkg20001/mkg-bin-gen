@@ -17,6 +17,18 @@ const generators = [
 
 const pickExisting = paths => paths.filter(p => fs.existsSync(p))[0]
 
+function launchWrapper (fncLike, config) {
+  if (fncLike instanceof Promise) {
+    fncLike.then(imported => launchWrapper(imported, config))
+  } else if (typeof fncLike === 'function') {
+    return fncLike(config)
+  } else if (typeof fncLike.default === 'function') {
+    return fncLike
+  } else {
+    throw new TypeError('bin-gen was passed non-function/non-import object. Pass it either an import() promise with a default function export, a function or an object with a .default function property')
+  }
+}
+
 module.exports = (name, { validator: v, formats: f, yargsExtends: y, configNameGenerators: g }, init) => {
   const yargs = require('yargs')
     .option('verbose', {
@@ -57,5 +69,5 @@ module.exports = (name, { validator: v, formats: f, yargsExtends: y, configNameG
   Object.assign(config, parsed)
   Object.assign(config, argv)
 
-  return init(config)
+  launchWrapper(init, config)
 }
